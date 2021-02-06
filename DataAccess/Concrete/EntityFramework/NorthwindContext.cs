@@ -15,6 +15,19 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Personel> Personels { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //defualt şemayı belirmek için kullanılan kod
+            //modelBuilder.HasDefaultSchema("dbo");
+            //"dbo" zorunlu değildir fakat farklı şemalar kullanılan bir veritabanından veri çekilecekse hangi şema olduğu belirtilmelidir
+            //belirtilmemişsse default şemadan veri alınır
+            modelBuilder.Entity<Personel>().ToTable("Employees");
+            modelBuilder.Entity<Personel>().Property(p=>p.Id).HasColumnName("EmployeeID");
+            modelBuilder.Entity<Personel>().Property(p=>p.Name).HasColumnName("FirstName");
+            modelBuilder.Entity<Personel>().Property(p=>p.Surname).HasColumnName("LastName");
+        }
 
     }
 }
