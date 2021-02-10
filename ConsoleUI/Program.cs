@@ -38,7 +38,7 @@ namespace ConsoleUI
         private static void InMemoryTest()
         {
             ProductManager productManager = new ProductManager(new InMemoryProductDal());
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetAll().Data)
             {
                 Console.WriteLine(product.ProductName);
             }
@@ -46,11 +46,20 @@ namespace ConsoleUI
 
         private static void ProductText()
         {
-            ProductManager efProductManager = new ProductManager(new EfProductDal());
-            foreach (var product in efProductManager.GetProductDetails())
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            var result = productManager.GetProductDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine(product.ProductName+"/"+product.CategoryName);
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
     }
 }
