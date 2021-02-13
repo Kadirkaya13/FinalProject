@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -14,9 +15,10 @@ namespace Business.Concrete
         {
             _personelDal = personelDal;
         }
-        public List<Personel> GetAll()
+        public IDataResult<List<Personel> >GetAll()
         {
-            return _personelDal.GetAll();
+                
+            return new SuccessDataResult< List<Personel>>(_personelDal.GetAll());
         }
     }
 }

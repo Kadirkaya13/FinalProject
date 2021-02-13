@@ -20,7 +20,7 @@ namespace ConsoleUI
         private static void CategoryText()
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            foreach (var category in categoryManager.GetAll())
+            foreach (var category in categoryManager.GetAll().Data)
             {
                 Console.WriteLine(category.CategoryName);
             }
@@ -29,7 +29,7 @@ namespace ConsoleUI
         private static void PersonelTest()
         {
             PersonelManager personelManager = new PersonelManager(new EfPersonelDal());
-            foreach (var personel in personelManager.GetAll())
+            foreach (var personel in personelManager.GetAll().Data)
             {
                 Console.WriteLine("{0} / {1} / {2}", personel.Id, personel.Name, personel.Surname);
             }
