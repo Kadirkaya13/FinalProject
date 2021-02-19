@@ -21,8 +21,8 @@ namespace Business.DependencyResolvers.Autofac
             //biri senden IProductService isterse ona ProductManager ver anlamına geliyor
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
