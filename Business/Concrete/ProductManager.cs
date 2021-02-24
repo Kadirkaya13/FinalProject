@@ -32,8 +32,11 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            BusinessRules.Run(ChechIfCategoryCountOfCategoryCorrect(product.CategoryId), ChechIfProductNameExists(product.ProductName),CheckIfCategoryLimitExceded());
-
+            IResult result =BusinessRules.Run(ChechIfCategoryCountOfCategoryCorrect(product.CategoryId), ChechIfProductNameExists(product.ProductName),CheckIfCategoryLimitExceded());
+            if (result !=null)
+            {
+                return result;
+            }
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
