@@ -14,11 +14,11 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
     {
-        public List<ProductDetailDto> GetProductDetails()
+        public List<ProductDetailDto> GetProductDetails(Expression<Func<Product, bool>> filter = null)
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                var result = from p in context.Products
+                var result = from p in filter == null ? context.Products : context.Products.Where(filter)
                              join c in context.Categories
                              on p.CategoryId equals c.CategoryId
                              select new ProductDetailDto

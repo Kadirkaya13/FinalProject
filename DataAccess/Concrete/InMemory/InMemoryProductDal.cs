@@ -61,6 +61,11 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
+        public List<ProductDetailDto> GetProductDetails(Expression<Func<Product, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Product product)
         {
             //gönderilen ürünün ıdsindeki ürünü listede bul anlamına geliyor
